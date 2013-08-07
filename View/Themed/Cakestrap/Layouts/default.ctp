@@ -29,6 +29,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: <small>the rapid development php fr
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
+		echo $this->Html->meta('viewport', 'width=device-width, initial-scale=1.0');
 
 		/** jQuery **/
 		echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
