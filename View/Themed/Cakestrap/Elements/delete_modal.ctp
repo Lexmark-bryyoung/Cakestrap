@@ -1,5 +1,5 @@
 <?php
-$delete_link = $this->Form->postLink(__('Delete'), array('action' => 'delete', $object_id), array('class' => 'btn btn-danger'), __('Are you sure you want to delete # %s?', $object_id));
+$delete_link = $this->Form->postLink(__('Delete'), array('action' => 'delete', $object_id), array('class' => 'btn btn-danger'));
 ?>
 <div id="deleteModal-<?php echo $object_id; ?>" class="modal fade">
 	<div class="modal-dialog">

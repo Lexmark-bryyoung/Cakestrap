@@ -22,8 +22,9 @@
 	$sidebar = $this->Html->link(__d('cake', 'Edit %s', $singularHumanName),   array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'list-group-item'));
 	$navbar = $this->Html->tag('li', $this->Html->link(__d('cake', 'Edit %s', $singularHumanName),   array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey])));
 	
-	$sidebar .= $this->Form->postLink(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'list-group-item'), __d('cake', 'Are you sure you want to delete # %s?', ${$singularVar}[$modelClass][$primaryKey]));
-	$navbar .= $this->Html->tag('li', $this->Form->postLink(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), null, __d('cake', 'Are you sure you want to delete # %s?', ${$singularVar}[$modelClass][$primaryKey])));
+	$sidebar .= $this->Html->link(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ${$singularVar}[$modelClass][$primaryKey]));
+	$navbar .= $this->Html->tag('li', $this->Html->link(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ${$singularVar}[$modelClass][$primaryKey])));
+	$modals[] = $this->element('delete_modal', array('object_id' => ${$singularVar}[$modelClass][$primaryKey]));
 
 	$sidebar .= $this->Html->link(__d('cake', 'List %s', $pluralHumanName), array('action' => 'index'), array('class' => 'list-group-item'));
 	$navbar .= $this->Html->tag('li', $this->Html->link(__d('cake', 'List %s', $pluralHumanName), array('action' => 'index')));
@@ -222,3 +223,4 @@ $otherSingularVar = Inflector::variable($_alias);
 	</div>
 </div>
 <?php endforeach; ?>
+<?php if (!empty($modals)) echo implode("\n", $modals); ?>

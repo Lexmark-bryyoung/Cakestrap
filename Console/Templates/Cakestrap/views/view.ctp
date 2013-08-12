@@ -22,8 +22,9 @@
 	echo "<?php\n";
 	echo "\t\t\$sidebar = \$this->Html->link(__('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'list-group-item'));\n";
 	echo "\t\t\$navbar = \$this->Html->tag('li', \$this->Html->link(__('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])));\n";
-	echo "\t\t\$sidebar .= \$this->Form->postLink(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-	echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Form->postLink(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])));\n";
+	echo "\t\t\$sidebar .= \$this->Html->link(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-' . \${$singularVar}['{$modelClass}']['{$primaryKey}'])));\n";
+	echo "\t\t\$modals[] = \$this->element('delete_modal', array('object_id' => \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
 	echo "\t\t\$sidebar .= \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index'), array('class' => 'list-group-item'));\n";
 	echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index')));\n";
 	echo "\t\t\$sidebar .= \$this->Html->link(__('New " . $singularHumanName . "'), array('action' => 'add'), array('class' => 'list-group-item'));\n";
@@ -168,3 +169,4 @@ echo "\t<?php endforeach; ?>\n";
 	</div>
 </div>
 <?php endforeach; ?>
+<?php echo "<?php if (!empty(\$modals)) echo implode(\"\\n\", \$modals); ?>\n"; ?>

@@ -136,5 +136,5 @@ endforeach;
 	</ul>
 		</div>
 
-<?php echo implode("\n", $modals); ?>
 </div>
+<?php if (!empty($modals)) echo implode("\n", $modals); ?>
