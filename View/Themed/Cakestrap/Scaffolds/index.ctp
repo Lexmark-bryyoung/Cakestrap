@@ -99,12 +99,9 @@ foreach (${$pluralVar} as ${$singularVar}):
 		echo '<td class="actions">';
 		echo $this->Html->link(__d('cake', 'View'), array('action' => 'view', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-small'));
 		echo ' ' . $this->Html->link(__d('cake', 'Edit'), array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-small'));
-		echo ' ' . $this->Form->postLink(
-			__d('cake', 'Delete'),
-			array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]),
-			array('class' => 'btn btn-default btn-small'),
-			__d('cake', 'Are you sure you want to delete # %s?', ${$singularVar}[$modelClass][$primaryKey])
-		);
+		
+		$modals[] = $this->element('delete_modal', array('object_id' => ${$singularVar}[$modelClass][$primaryKey]));
+		echo ' ' . $this->Html->link(__d('cake', 'Delete'), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ${$singularVar}[$modelClass][$primaryKey]));
 		echo '</td>';
 	echo '</tr>';
 
@@ -139,5 +136,5 @@ endforeach;
 	</ul>
 		</div>
 
-
+<?php echo implode("\n", $modals); ?>
 </div>
