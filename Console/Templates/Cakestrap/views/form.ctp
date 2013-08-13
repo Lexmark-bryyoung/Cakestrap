@@ -21,8 +21,9 @@
 <?php /* craft navigation */
 echo "<?php \n\$sidebar = \$navbar = '';\n";
 if (strpos($action, 'add') === false) {
-	echo "\$sidebar .= \$this->Form->postLink(__('Delete'), array('action' => 'delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', \$this->Form->value('{$modelClass}.{$primaryKey}')));\n";
-	echo "\$navbar .= \$this->Html->tag('li', \$this->Form->postLink(__('Delete'), array('action' => 'delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), null, __('Are you sure you want to delete # %s?', \$this->Form->value('{$modelClass}.{$primaryKey}'))));\n";
+	echo "\$sidebar .= \$this->Html->link(__('Delete'), array('action' => 'delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-{$modelClass}' . \$this->Form->value('{$modelClass}.{$primaryKey}')));\n";
+	echo "\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('Delete'), array('action' => 'delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-{$modelClass}' . \$this->Form->value('{$modelClass}.{$primaryKey}'))));\n";
+	echo "\$modals[] = \$this->element('delete_modal', array('object_id' => \$this->Form->value('{$modelClass}.{$primaryKey}'), 'controller' => '{$pluralVar}', 'model' => '{$modelClass}'));\n";
 }
 	echo "\$sidebar .= \$this->Html->link(__('List $pluralHumanName'), array('action' => 'index'), array('class' => 'list-group-item'));";
 	echo "\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('List $pluralHumanName'), array('action' => 'index')));";
@@ -88,3 +89,4 @@ echo "?>";
 ?>
 </div>
 </div>
+<?php echo "<?php if (!empty(\$modals)) echo implode(\"\\n\", \$modals); ?>\n"; ?>

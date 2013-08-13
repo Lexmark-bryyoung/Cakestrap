@@ -21,16 +21,15 @@
 <?php
 $sidebar = $navbar = '';
 if ($this->request->action !== 'add') {
-	$sidebar .= $this->Form->postLink(
+	$sidebar .= $this->Html->link(
 		__d('cake', 'Delete'),
 		array('action' => 'delete', $this->Form->value($modelClass . '.' . $primaryKey)),
-		array('class' => 'list-group-item'),
-		__d('cake', 'Are you sure you want to delete # %s?', $this->Form->value($modelClass . '.' . $primaryKey)));
-	$navbar .= $this->Html->tag('li', $this->Form->postLink(
+		array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $modelClass . $this->Form->value("$modelClass.$primaryKey")));
+	$navbar .= $this->Html->tag('li', $this->Html->link(
 		__d('cake', 'Delete'),
 		array('action' => 'delete', $this->Form->value($modelClass . '.' . $primaryKey)),
-		array('class' => 'list-group-item'),
-		__d('cake', 'Are you sure you want to delete # %s?', $this->Form->value($modelClass . '.' . $primaryKey))));
+		array('data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $modelClass . $this->Form->value("$modelClass.$primaryKey"))));
+	$modals[] = $this->element('delete_modal', array('object_id' => $this->Form->value("$modelClass.$primaryKey"), 'controller' => $pluralVar, 'model' => $modelClass));
 }
 $sidebar .= $this->Html->link(__d('cake', 'List') . ' ' . $pluralHumanName, array('action' => 'index'), array('class' => 'list-group-item'));
 $navbar .= $this->Html->tag('li', $this->Html->link(__d('cake', 'List') . ' ' . $pluralHumanName, array('action' => 'index')));
@@ -90,3 +89,4 @@ foreach ($associations as $_type => $_data) {
 ?>
 </div>
 </div>
+<?php if (!empty($modals)) echo implode("\n", $modals); ?>

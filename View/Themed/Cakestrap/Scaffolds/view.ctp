@@ -22,9 +22,9 @@
 	$sidebar = $this->Html->link(__d('cake', 'Edit %s', $singularHumanName),   array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'list-group-item'));
 	$navbar = $this->Html->tag('li', $this->Html->link(__d('cake', 'Edit %s', $singularHumanName),   array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey])));
 	
-	$sidebar .= $this->Html->link(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ${$singularVar}[$modelClass][$primaryKey]));
-	$navbar .= $this->Html->tag('li', $this->Html->link(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ${$singularVar}[$modelClass][$primaryKey])));
-	$modals[] = $this->element('delete_modal', array('object_id' => ${$singularVar}[$modelClass][$primaryKey]));
+	$sidebar .= $this->Html->link(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $singularHumanName . ${$singularVar}[$modelClass][$primaryKey]));
+	$navbar .= $this->Html->tag('li', $this->Html->link(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $singularHumanName . ${$singularVar}[$modelClass][$primaryKey])));
+	$modals[] = $this->element('delete_modal', array('object_id' => ${$singularVar}[$modelClass][$primaryKey], 'controller' => $pluralVar, 'model' => $singularHumanName));
 
 	$sidebar .= $this->Html->link(__d('cake', 'List %s', $pluralHumanName), array('action' => 'index'), array('class' => 'list-group-item'));
 	$navbar .= $this->Html->tag('li', $this->Html->link(__d('cake', 'List %s', $pluralHumanName), array('action' => 'index')));
@@ -199,12 +199,12 @@ $otherSingularVar = Inflector::variable($_alias);
 			);
 			echo "\n";
 			echo "\t\t\t\t";
-			echo $this->Form->postLink(
+			echo $this->Html->link(
 				__d('cake', 'Delete'),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'delete', ${$otherSingularVar}[$_details['primaryKey']]),
-					array('class' => 'btn btn-default btn-small'),
-				__d('cake', 'Are you sure you want to delete # %s?', ${$otherSingularVar}[$_details['primaryKey']])
+					array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ucfirst($otherSingularVar) . ${$otherSingularVar}[$_details['primaryKey']])
 			);
+			$modals[] = $this->element('delete_modal', array('object_id' => ${$otherSingularVar}[$_details['primaryKey']], 'controller' => $_details['controller'], 'model' => ucfirst($otherSingularVar)));
 			echo "\n";
 			echo "\t\t\t</td>\n";
 		echo "\t\t</tr>\n";

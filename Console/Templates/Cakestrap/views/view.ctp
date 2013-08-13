@@ -22,9 +22,9 @@
 	echo "<?php\n";
 	echo "\t\t\$sidebar = \$this->Html->link(__('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'list-group-item'));\n";
 	echo "\t\t\$navbar = \$this->Html->tag('li', \$this->Html->link(__('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])));\n";
-	echo "\t\t\$sidebar .= \$this->Html->link(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-	echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-' . \${$singularVar}['{$modelClass}']['{$primaryKey}'])));\n";
-	echo "\t\t\$modals[] = \$this->element('delete_modal', array('object_id' => \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\t\$sidebar .= \$this->Html->link(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'list-group-item', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-$modelClass' . \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('data-toggle' => 'modal', 'data-target' => '#deleteModal-$modelClass' . \${$singularVar}['{$modelClass}']['{$primaryKey}'])));\n";
+	echo "\t\t\$modals[] = \$this->element('delete_modal', array('object_id' => \${$singularVar}['{$modelClass}']['{$primaryKey}'], 'controller' => '$pluralVar', 'model' => '$modelClass'));\n";
 	echo "\t\t\$sidebar .= \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index'), array('class' => 'list-group-item'));\n";
 	echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index')));\n";
 	echo "\t\t\$sidebar .= \$this->Html->link(__('New " . $singularHumanName . "'), array('action' => 'add'), array('class' => 'list-group-item'));\n";
@@ -154,7 +154,8 @@ echo "\t<?php
 			echo "\t\t\t<td class=\"actions\">\n";
 			echo "\t\t\t\t<?php echo \$this->Html->link(__('View'), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small')); ?>\n";
 			echo "\t\t\t\t<?php echo \$this->Html->link(__('Edit'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small')); ?>\n";
-			echo "\t\t\t\t<?php echo \$this->Form->postLink(__('Delete'), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small'), __('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
+			echo "\t\t\t\t<?php echo \$this->Html->link(__('Delete'), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-$alias' . \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n"; 
+			echo "\t\t\t\t<?php \$modals[] = \$this->element('delete_modal', array('object_id' => \${$otherSingularVar}['{$details['primaryKey']}'], 'controller' => '{$details['controller']}', 'model' => '$alias')); ?>\n";
 			echo "\t\t\t</td>\n";
 		echo "\t\t</tr>\n";
 

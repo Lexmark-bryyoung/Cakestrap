@@ -1,7 +1,7 @@
 <?php
-$delete_link = $this->Form->postLink(__('Delete'), array('action' => 'delete', $object_id), array('class' => 'btn btn-danger'));
+$delete_link = $this->Form->postLink(__('Delete'), array('controller' => $controller, 'action' => 'delete', $object_id), array('class' => 'btn btn-danger'));
 ?>
-<div id="deleteModal-<?php echo $object_id; ?>" class="modal fade">
+<div id="deleteModal-<?php echo "$model$object_id"; ?>" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -9,7 +9,7 @@ $delete_link = $this->Form->postLink(__('Delete'), array('action' => 'delete', $
 				<h4 class="modal-title">Delete Confirmation</h4>
 			</div>
 			<div class="modal-body">
-				<p>Are you sure you want to delete # <?php echo $object_id; ?>?</p>
+				<p>Are you sure you want to delete <?php echo "$model #$object_id"; ?>?</p>
 			</div>
 			<div class="modal-footer">
 				<?php echo $delete_link; ?>
