@@ -25,7 +25,7 @@
 	$done = array();
 	foreach ($associations as $type => $data) {
 		foreach ($data as $alias => $details) {
-			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
+			if ($details['controller'] != strtolower($this->name) && !in_array($details['controller'], $done)) {
 				echo "\t\t\$sidebar .= \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index'), array('class' => 'list-group-item'));\n";
 				echo "\t\t\$navbar .= \$this->Html->tag('li', \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index')));\n";
 				echo "\t\t\$sidebar .= \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add'), array('class' => 'list-group-item'));\n";
