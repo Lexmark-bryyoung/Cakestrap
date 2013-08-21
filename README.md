@@ -4,7 +4,7 @@ Cakestrap
 _CakePHP + Bootstrap_
 
 CakePHP version: 2.3.8
-Bootstrap version: 3 RC 1
+Bootstrap version: 3.0
 
 This is intended to allow you to bake a new site using Bootstrap (http://getbootstrap.com/).
 

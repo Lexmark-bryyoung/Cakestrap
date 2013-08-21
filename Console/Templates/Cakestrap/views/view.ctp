@@ -44,27 +44,7 @@
 	}
 	echo "?>\n";
 ?>
-<div class="actions navbar hidden-lg">
-	<a class="navbar-brand">Actions</a>
-	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <div class="nav-collapse collapse navbar-responsive-collapse">
-		<ul class="nav navbar-nav">
-			<?php echo "<?php echo \$navbar; ?>\n"; ?>
-		</ul>
-	</div>
-</div>
-<div class="actions col-lg-2 visible-lg">
-	<div class="list-group">
-		<div class="list-group-item">
-			<h4>Actions</h4>
-		</div>
-		<?php echo "<?php echo \$sidebar; ?>\n"; ?>
-	</div>
-</div>
+<?php echo "<?php echo \$this->element('cake_navigation', compact('sidebar', 'navbar')); ?>"; ?>
 <div class="col-lg-10 col-12">
 	<h2><?php echo "<?php echo __('{$singularHumanName}'); ?>"; ?></h2>
 	<table class="table table-striped">
@@ -111,7 +91,7 @@ if (!empty($associations['hasOne'])) :
 	<?php echo "<?php endif; ?>\n"; ?>
 		<div class="actions">
 			<ul class="list-unstyled">
-				<li><?php echo "<?php echo \$this->Html->link(__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small')); ?></li>\n"; ?>
+				<li><?php echo "<?php echo \$this->Html->link(__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => 'btn btn-default')); ?></li>\n"; ?>
 			</ul>
 		</div>
 	</div>
@@ -152,9 +132,9 @@ echo "\t<?php
 			}
 
 			echo "\t\t\t<td class=\"actions\">\n";
-			echo "\t\t\t\t<?php echo \$this->Html->link(__('View'), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small')); ?>\n";
-			echo "\t\t\t\t<?php echo \$this->Html->link(__('Edit'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small')); ?>\n";
-			echo "\t\t\t\t<?php echo \$this->Html->link(__('Delete'), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-$alias' . \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n"; 
+			echo "\t\t\t\t<?php echo \$this->Html->link(__('View'), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-xs')); ?>\n";
+			echo "\t\t\t\t<?php echo \$this->Html->link(__('Edit'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-xs')); ?>\n";
+			echo "\t\t\t\t<?php echo \$this->Html->link(__('Delete'), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), array('class' => 'btn btn-default btn-xs', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-$alias' . \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n"; 
 			echo "\t\t\t\t<?php \$modals[] = \$this->element('delete_modal', array('object_id' => \${$otherSingularVar}['{$details['primaryKey']}'], 'controller' => '{$details['controller']}', 'model' => '$alias')); ?>\n";
 			echo "\t\t\t</td>\n";
 		echo "\t\t</tr>\n";
@@ -165,7 +145,7 @@ echo "\t<?php endforeach; ?>\n";
 <?php echo "<?php endif; ?>\n\n"; ?>
 	<div class="actions">
 		<ul class="list-unstyled">
-			<li><?php echo "<?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add'), array('class' => 'btn btn-default btn-small')); ?>"; ?> </li>
+			<li><?php echo "<?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add'), array('class' => 'btn btn-default')); ?>"; ?> </li>
 		</ul>
 	</div>
 </div>

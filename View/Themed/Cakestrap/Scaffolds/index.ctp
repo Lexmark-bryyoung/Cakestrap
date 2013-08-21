@@ -47,27 +47,7 @@
 		}
 	}
 ?>
-<div class="actions navbar hidden-lg">
-	<a class="navbar-brand">Actions</a>
-	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <div class="nav-collapse collapse navbar-responsive-collapse">
-		<ul class="nav navbar-nav">
-			<?php echo $navbar; ?>
-		</ul>
-	</div>
-</div>
-<div class="actions col-lg-2 visible-lg">
-	<div class="list-group">
-		<div class="list-group-item">
-			<h4>Actions</h4>
-		</div>
-		<?php echo $sidebar; ?>
-	</div>
-</div>
+<?php echo $this->element('cake_navigation', compact('sidebar', 'navbar')); ?>
 <div class="col-lg-10 col-12">
 	<h2><?php echo $pluralHumanName; ?></h2>
 	<table class="table table-bordered table-striped">
@@ -97,11 +77,11 @@ foreach (${$pluralVar} as ${$singularVar}):
 		}
 
 		echo '<td class="actions">';
-		echo $this->Html->link(__d('cake', 'View'), array('action' => 'view', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-small'));
-		echo ' ' . $this->Html->link(__d('cake', 'Edit'), array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-small'));
+		echo $this->Html->link(__d('cake', 'View'), array('action' => 'view', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-xs'));
+		echo ' ' . $this->Html->link(__d('cake', 'Edit'), array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-xs'));
 		
 		$modals[] = $this->element('delete_modal', array('object_id' => ${$singularVar}[$modelClass][$primaryKey], 'controller' => $pluralVar, 'model' => $singularHumanName));
-		echo ' ' . $this->Html->link(__d('cake', 'Delete'), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $singularHumanName . ${$singularVar}[$modelClass][$primaryKey]));
+		echo ' ' . $this->Html->link(__d('cake', 'Delete'), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array('class' => 'btn btn-default btn-xs', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $singularHumanName . ${$singularVar}[$modelClass][$primaryKey]));
 		echo '</td>';
 	echo '</tr>';
 

@@ -35,7 +35,7 @@ if ($noLogs):
 	endforeach;
 endif;
 ?>
-<div class="well">
+<div class="well well-sm">
 <?php
 if ($noLogs || isset($_forced_from_dbo_)):
 	foreach ($logs as $source => $logInfo):

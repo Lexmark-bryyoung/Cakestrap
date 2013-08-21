@@ -36,27 +36,7 @@
 	}
 	echo "?>";
 ?>
-<div class="actions navbar hidden-lg">
-	<a class="navbar-brand">Actions</a>
-	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <div class="nav-collapse collapse navbar-responsive-collapse">
-		<ul class="nav navbar-nav">
-			<?php echo "<?php echo \$navbar; ?>\n"; ?>
-		</ul>
-	</div>
-</div>
-<div class="actions col-lg-2 visible-lg">
-	<div class="list-group">
-		<div class="list-group-item">
-			<h4>Actions</h4>
-		</div>
-		<?php echo "<?php echo \$sidebar; ?>\n"; ?>
-	</div>
-</div>
+<?php echo "<?php echo \$this->element('cake_navigation', compact('sidebar', 'navbar')); ?>"; ?>
 <div class="col-lg-10 col-12">
 	<h2><?php echo "<?php echo __('{$pluralHumanName}'); ?>"; ?></h2>
 	<table class="table table-striped table-bordered">
@@ -86,9 +66,9 @@
 		}
 
 		echo "\t\t<td class=\"actions\">\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('View'), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-default btn-small')); ?>\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('Edit'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-default btn-small')); ?>\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('Delete'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-{$modelClass}' . \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
+		echo "\t\t\t<?php echo \$this->Html->link(__('View'), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-default btn-xs')); ?>\n";
+		echo "\t\t\t<?php echo \$this->Html->link(__('Edit'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-default btn-xs')); ?>\n";
+		echo "\t\t\t<?php echo \$this->Html->link(__('Delete'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('class' => 'btn btn-default btn-xs', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-{$modelClass}' . \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
 		echo "\t\t\t<?php \$modals[] = \$this->element('delete_modal', array('object_id' => \${$singularVar}['{$modelClass}']['{$primaryKey}'], 'controller' => '{$pluralVar}', 'model' => '{$modelClass}')); ?>\n";
 		echo "\t\t</td>\n";
 	echo "\t</tr>\n";

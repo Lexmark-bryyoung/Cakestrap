@@ -57,27 +57,7 @@
 		}
 	}
 ?>
-<div class="actions navbar hidden-lg">
-	<a class="navbar-brand">Actions</a>
-	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <div class="nav-collapse collapse navbar-responsive-collapse">
-		<ul class="nav navbar-nav">
-			<?php echo $navbar; ?>
-		</ul>
-	</div>
-</div>
-<div class="actions col-lg-2 visible-lg">
-	<div class="list-group">
-		<div class="list-group-item">
-			<h4>Actions</h4>
-		</div>
-		<?php echo $sidebar; ?>
-	</div>
-</div>
+<?php echo $this->element('cake_navigation', compact('sidebar', 'navbar')); ?>
 <div class="col-lg-10 col-12">
 	<h2><?php echo __d('cake', 'View %s', $singularHumanName); ?></h2>
 	<table class="table table-striped">
@@ -135,7 +115,7 @@ foreach ($associations['hasOne'] as $_alias => $_details): ?>
 			echo $this->Html->link(
 				__d('cake', 'Edit %s', Inflector::humanize(Inflector::underscore($_alias))),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'edit', ${$singularVar}[$_alias][$_details['primaryKey']]),
-					array('class' => 'btn btn-default btn-small')
+					array('class' => 'btn btn-default')
 			);
 			echo "</li>\n";
 			?>
@@ -188,23 +168,23 @@ $otherSingularVar = Inflector::variable($_alias);
 			echo $this->Html->link(
 				__d('cake', 'View'),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'view', ${$otherSingularVar}[$_details['primaryKey']]),
-					array('class' => 'btn btn-default btn-small')
+					array('class' => 'btn btn-default btn-xs')
 			);
 			echo "\n";
 			echo "\t\t\t\t";
 			echo $this->Html->link(
 				__d('cake', 'Edit'),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'edit', ${$otherSingularVar}[$_details['primaryKey']]),
-					array('class' => 'btn btn-default btn-small')
+					array('class' => 'btn btn-default btn-xs')
 			);
 			echo "\n";
 			echo "\t\t\t\t";
 			echo $this->Html->link(
 				__d('cake', 'Delete'),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'delete', ${$otherSingularVar}[$_details['primaryKey']]),
-					array('class' => 'btn btn-default btn-small', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . ucfirst($otherSingularVar) . ${$otherSingularVar}[$_details['primaryKey']])
+					array('class' => 'btn btn-default btn-xs', 'data-toggle' => 'modal', 'data-target' => '#deleteModal-' . $_alias . ${$otherSingularVar}[$_details['primaryKey']])
 			);
-			$modals[] = $this->element('delete_modal', array('object_id' => ${$otherSingularVar}[$_details['primaryKey']], 'controller' => $_details['controller'], 'model' => ucfirst($otherSingularVar)));
+			$modals[] = $this->element('delete_modal', array('object_id' => ${$otherSingularVar}[$_details['primaryKey']], 'controller' => $_details['controller'], 'model' => $_alias));
 			echo "\n";
 			echo "\t\t\t</td>\n";
 		echo "\t\t</tr>\n";
@@ -217,7 +197,7 @@ $otherSingularVar = Inflector::variable($_alias);
 			<li><?php echo $this->Html->link(
 				__d('cake', "New %s", Inflector::humanize(Inflector::underscore($_alias))),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'add'),
-					array('class' => 'btn btn-default btn-small')
+					array('class' => 'btn btn-default')
 			); ?> </li>
 		</ul>
 	</div>
