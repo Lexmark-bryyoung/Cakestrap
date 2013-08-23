@@ -138,7 +138,7 @@ foreach ($relations as $_alias => $_details):
 $otherSingularVar = Inflector::variable($_alias);
 ?>
 <div class="related">
-	<h3><?php echo __d('cake', "Related %s", Inflector::humanize($_details['controller'])); ?></h3>
+	<h3><?php echo __d('cake', "Related %s", Inflector::humanize(Inflector::underscore(Inflector::pluralize($_alias)))); ?></h3>
 <?php if (!empty(${$singularVar}[$_alias])): ?>
 	<table class="table table-striped table-bordered">
 	<tr>
